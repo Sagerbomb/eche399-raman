@@ -1,0 +1,170 @@
+---
+title: "Raman Spectra"
+author: "Jeffery Sagerer - Case Western Reserve University"
+date: "April 2, 2018"
+output:
+  pdf_document:
+    toc: true
+  html_document:
+    toc: true
+    font-size: 10em
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("D:/JCS/Miscellaneous/Kevley/SERS-Enhancement-Factors/peak_id.R")
+folder <- "./03-29-2018/"
+from <- NULL
+to <- NULL
+```
+
+## hyperSpec
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(hyperSpec)
+
+spec <- read.delim(paste0(folder, files[9]), sep = "\t", header = FALSE)
+
+spc <- new("hyperSpec", spc = spec$V2, wavelength = spec$V1)
+
+plot(spc)
+bl <- spc.rubberband(spc, noise = 30, df = 10)
+spc.blc <- spc - bl
+plot(spc.blc)
+```
+
+
+```{r}
+
+files <- list.files(folder, pattern = ".txt")
+#files <- list.files(folder, pattern = glob2rx("*20x*.txt*"))
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]), save = FALSE)))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+
+## ALL
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+files <- list.files(folder, pattern = ".txt")
+#files <- list.files(folder, pattern = glob2rx("*20x*.txt*"))
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]), save = FALSE)))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+## 20x
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#files <- list.files(folder, pattern = ".txt")
+files <- list.files(folder, pattern = glob2rx("*20x*.txt*"))
+
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]))))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+## 50x
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#files <- list.files(folder, pattern = ".txt")
+files <- list.files(folder, pattern = glob2rx("*50x*.txt*"))
+
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]))))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+## ibuprofen
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#files <- list.files(folder, pattern = ".txt")
+files <- list.files(folder, pattern = glob2rx("*ibu*.txt*"))
+
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]))))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+## 1s, 2 reps
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#files <- list.files(folder, pattern = ".txt")
+files <- list.files(folder, pattern = glob2rx("*1_2*.txt*"))
+
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]))))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
+
+## 2s, 3 reps
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#files <- list.files(folder, pattern = ".txt")
+files <- list.files(folder, pattern = glob2rx("*1_2*.txt*"))
+
+
+spectra <- as.list(NULL)
+
+for (i in 1:length(files)){
+  spectra <- append(spectra, list(peak_id(paste0(folder, files[i]))))
+}
+
+for (i in 1:length(spectra)){
+  p <- spectra[[i]][2]
+  print(p)
+}
+```
